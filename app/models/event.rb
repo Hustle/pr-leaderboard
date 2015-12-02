@@ -6,8 +6,10 @@ class Event < ActiveRecord::Base
 
 
     def add_events!
-      client.organization_events('viewthespace', per_page: 5).each do |event|
-        self.create!(data: event.to_h)
+      client.organization_events('viewthespace', per_page: 1).each do |github_event|
+        event = Event.find_by_github_id(github_event.id) || Event.new(github_id: github_event.id)
+        event.data = github_event.to_h
+        event.save!
       end
     end
 
