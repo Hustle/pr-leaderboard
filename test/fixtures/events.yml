@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  data: MyString
+  jsonb: MyString
+
+two:
+  data: MyString
+  jsonb: MyString
