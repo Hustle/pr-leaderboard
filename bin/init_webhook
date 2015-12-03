@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+require_relative '../config/boot'
+
+client = $github_client
+callback_url = "http://vts-github-events.herokuapp.com/github_webhooks"
+webhook_secret = ENV['GITHUB_WEBHOOK_SECRET']
+repo = "viewthespace/viewthespace"
+
+client.subscribe "https://github.com/#{repo}/events/push.json", callback_url, webhook_secret
