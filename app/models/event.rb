@@ -8,7 +8,8 @@ class Event < ActiveRecord::Base
 
 
     def add_events!
-      client.organization_events('viewthespace', per_page: 1).each do |github_event|
+      client.organization_events('viewthespace', per_page: 100).each do |github_event|
+        Rails.logger.info("Add/updating event #{github_event.id}")
         event = Event.find_by_github_id(github_event.id) || Event.new
         event.data = github_event.to_h
         event.save!
