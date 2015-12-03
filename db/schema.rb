@@ -11,18 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151203214221) do
+ActiveRecord::Schema.define(version: 20151203215922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
-    t.jsonb    "data",       default: {}, null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.string   "github_id",               null: false
+    t.jsonb    "data",              default: {}, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "github_id",                      null: false
+    t.datetime "github_created_at"
   end
 
+  add_index "events", ["github_created_at"], name: "index_events_on_github_created_at", using: :btree
   add_index "events", ["github_id"], name: "index_events_on_github_id", unique: true, using: :btree
 
 end
