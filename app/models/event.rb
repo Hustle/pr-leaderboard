@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
   serialize :data, HashSerializer
 
   before_save :set_github_id
+  before_save :set_github_created_at
 
   class << self
 
@@ -29,5 +30,8 @@ class Event < ActiveRecord::Base
     self.github_id = data[:id]
   end
 
+  def set_github_created_at
+    self.github_created_at = data[:created_at]
+  end
 
 end
