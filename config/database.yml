@@ -10,16 +10,15 @@ development: &dev
   encoding: utf8
   username: viewthespace
   password:
-  pool: 25
+  pool: 5
   timeout: 5000
 
-
-development: &dev
+test:
   adapter: postgresql
   database: github_events_test
   encoding: utf8
   username: viewthespace
   password:
-  pool: 25
+  pool: 5
   timeout: 5000
 
