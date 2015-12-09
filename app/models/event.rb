@@ -5,7 +5,21 @@ class Event < ActiveRecord::Base
   before_save :set_github_id
   before_save :set_github_created_at
 
+  store_accessor :data, :org, :repo, :type, :actor, :public, :payload
+
   class << self
+
+    def merged_pull_request_counts
+      Hash[merged_pull_request_events.group_by{|event| event.payload.pull_request.merged_by.login}.
+        each_with_object({}){|(key, value), hash| hash[key] = value.length}.
+        sort_by{|(key,value)| value }.reverse]
+    end
+
+    def merged_pull_request_events
+      #closed merge
+      Event.where('data @> ?', { type: "PullRequestEvent", payload: { action: 'closed', pull_request: { merged: true } } }.to_json).
+        select{|e| e.payload.pull_request.user.login != e.payload.pull_request.merged_by.login }
+    end
 
 
     def add_events!
@@ -16,6 +30,8 @@ class Event < ActiveRecord::Base
         event.save!
       end
     end
+
+    private
 
     def client
       $github_client
