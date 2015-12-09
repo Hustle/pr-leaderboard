@@ -22,8 +22,8 @@ class Event < ActiveRecord::Base
     end
 
     def pull_request_comment_events
-      where('data @> ?', { type: 'PullRequestReviewCommentEvent' }.to_json).where("data->'payload'->'pull_request' -> 'user' -> 'id' != (data->'actor' -> 'id')")
-        #select{ |e| e.payload.pull_request.user.id != e.actor.id }
+      where('data @> ?', { type: 'PullRequestReviewCommentEvent' }.to_json).
+        where("data->'payload'->'pull_request' -> 'user' -> 'id' != (data->'actor' -> 'id')")
     end
 
     def add_events!
