@@ -17,10 +17,14 @@ class Event < ActiveRecord::Base
 
     def merged_pull_request_events
       #closed merge
-      Event.where('data @> ?', { type: "PullRequestEvent", payload: { action: 'closed', pull_request: { merged: true } } }.to_json).
+      where('data @> ?', { type: "PullRequestEvent", payload: { action: 'closed', pull_request: { merged: true } } }.to_json).
         select{|e| e.payload.pull_request.user.login != e.payload.pull_request.merged_by.login }
     end
 
+    def pull_request_comment_events
+      where('data @> ?', { type: 'PullRequestReviewCommentEvent' }.to_json).where("data->'payload'->'pull_request' -> 'user' -> 'id' != (data->'actor' -> 'id')")
+        #select{ |e| e.payload.pull_request.user.id != e.actor.id }
+    end
 
     def add_events!
       client.organization_events('viewthespace', per_page: 100).each do |github_event|
