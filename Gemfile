@@ -28,6 +28,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'github_webhook'
 gem "octokit"
 gem 'puma'
+gem 'hashie'
 
 
 # Use ActiveModel has_secure_password
