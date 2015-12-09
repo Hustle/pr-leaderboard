@@ -16,9 +16,8 @@ class Event < ActiveRecord::Base
     end
 
     def merged_pull_request_events
-      #closed merge
       where('data @> ?', { type: "PullRequestEvent", payload: { action: 'closed', pull_request: { merged: true } } }.to_json).
-        select{|e| e.payload.pull_request.user.login != e.payload.pull_request.merged_by.login }
+        where( "data-> 'payload' -> 'pull_request' -> 'user' -> 'login' != ( data->'payload'->'pull_request' -> 'merged_by' -> 'login')")
     end
 
     def pull_request_comment_events
