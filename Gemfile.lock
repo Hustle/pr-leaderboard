@@ -92,6 +92,8 @@ GEM
     pry-byebug (3.3.0)
       byebug (~> 8.0)
       pry (~> 0.10)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     puma (2.15.3)
     rack (1.6.4)
     rack-test (0.6.3)
@@ -186,7 +188,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  byebug
   coffee-rails (~> 4.1.0)
   github_webhook
   hashie
@@ -195,6 +196,7 @@ DEPENDENCIES
   octokit
   pg
   pry-byebug
+  pry-rails
   puma
   rails (= 4.2.5)
   rails_12factor

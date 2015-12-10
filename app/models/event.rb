@@ -10,19 +10,11 @@ class Event < ActiveRecord::Base
   class << self
 
     def merged_pull_request_counts
-      Hash[merged_pull_request_events.group_by{|event| event.payload.pull_request.merged_by.login}.
-        each_with_object({}){|(key, value), hash| hash[key] = value.length}.
-        sort_by{|(key,value)| value }.reverse]
+      merged_pull_request_events.group("data -> 'payload' -> 'pull_request' -> 'merged_by' -> 'login'").order('count(*) desc').count
     end
 
-    def merged_pull_request_events
-      where('data @> ?', { type: "PullRequestEvent", payload: { action: 'closed', pull_request: { merged: true } } }.to_json).
-        where( "data-> 'payload' -> 'pull_request' -> 'user' -> 'login' != ( data->'payload'->'pull_request' -> 'merged_by' -> 'login')")
-    end
-
-    def pull_request_comment_events
-      where('data @> ?', { type: 'PullRequestReviewCommentEvent' }.to_json).
-        where("data->'payload'->'pull_request' -> 'user' -> 'id' != (data->'actor' -> 'id')")
+    def pull_request_comment_counts
+      pull_request_comment_events.group("data -> 'actor' -> 'login'").order('count(*) desc').count
     end
 
     def add_events!
@@ -36,10 +28,21 @@ class Event < ActiveRecord::Base
 
     private
 
+    def pull_request_comment_events
+      where('data @> ?', { type: 'PullRequestReviewCommentEvent' }.to_json).
+        where("data->'payload'->'pull_request' -> 'user' -> 'id' != (data->'actor' -> 'id')")
+    end
+
+
+
+    def merged_pull_request_events
+      where('data @> ?', { type: "PullRequestEvent", payload: { action: 'closed', pull_request: { merged: true } } }.to_json).
+        where( "data-> 'payload' -> 'pull_request' -> 'user' -> 'login' != ( data->'payload'->'pull_request' -> 'merged_by' -> 'login')")
+    end
+
     def client
       $github_client
     end
-
 
   end
 
