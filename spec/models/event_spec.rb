@@ -39,16 +39,11 @@ describe Event do
     end
 
 
+    let(:event){ Event.create data: github_data }
 
     specify do
-      event = Event.new
-      event.data = github_data
-      event.save!
       expect( ActiveSupport::HashWithIndifferentAccess.new(event.data)).to eq github_data
     end
-
-
-
 
   end
 
