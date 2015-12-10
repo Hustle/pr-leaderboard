@@ -3,6 +3,12 @@ require 'rails_helper'
 describe LeaderBoard do
 
   before do
+
+    ["CharlesMcMillan", "ianforsyth", "the1337sauce", "pawelgut", "juliantejera"].each_with_index do |login, index|
+      GithubUser.create! data: { login: login, id: index }
+    end
+
+
     expect(Event).to receive(:merged_pull_request_counts).and_return({
       "CharlesMcMillan"=>14,
       "the1337sauce"=>11,
@@ -22,6 +28,6 @@ describe LeaderBoard do
       {login: "the1337sauce", pull_request_comments: 0, pull_request_merges: 11, points: 22  },
       {login: "pawelgut", pull_request_comments: 21, pull_request_merges: 0, points: 21 },
       {login: "juliantejera", pull_request_comments: 0, pull_request_merges: 7, points: 14 }
-    ])
+    ].map{|entry| entry.merge(github_user: GithubUser.find_by_login!(entry[:login])) })
   end
 end
