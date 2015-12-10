@@ -4,6 +4,7 @@ class Event < ActiveRecord::Base
 
   before_save :set_github_id
   before_save :set_github_created_at
+  after_save :create_github_user
 
   store_accessor :data, :org, :repo, :type, :actor, :public, :payload
 
@@ -54,6 +55,10 @@ class Event < ActiveRecord::Base
 
   def set_github_created_at
     self.github_created_at = data[:created_at]
+  end
+
+  def create_github_user
+    GithubUser.create_unless_exists!(actor.id) if actor
   end
 
 end

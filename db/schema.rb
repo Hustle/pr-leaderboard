@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151203215922) do
+ActiveRecord::Schema.define(version: 20151210170343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,5 +26,16 @@ ActiveRecord::Schema.define(version: 20151203215922) do
 
   add_index "events", ["github_created_at"], name: "index_events_on_github_created_at", using: :btree
   add_index "events", ["github_id"], name: "index_events_on_github_id", unique: true, using: :btree
+
+  create_table "github_users", force: :cascade do |t|
+    t.integer  "github_id",               null: false
+    t.jsonb    "data",       default: {}, null: false
+    t.string   "login",                   null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "github_users", ["github_id"], name: "index_github_users_on_github_id", unique: true, using: :btree
+  add_index "github_users", ["login"], name: "index_github_users_on_login", unique: true, using: :btree
 
 end

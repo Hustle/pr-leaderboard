@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Event do
+describe Event, vcr: { record: :none} do
 
   describe 'data is stored properly' do
 
@@ -39,10 +39,14 @@ describe Event do
     end
 
 
-    let(:event){ Event.create data: github_data }
+    let!(:event){ Event.create data: github_data }
 
-    specify do
+    specify 'data is stored in database' do
       expect( ActiveSupport::HashWithIndifferentAccess.new(event.data)).to eq github_data
+    end
+
+    specify 'github user is added to database' do
+      expect(GithubUser.where(github_id: 6278442)).to exist
     end
 
   end
