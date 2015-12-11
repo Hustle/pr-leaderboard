@@ -1,3 +1,9 @@
 tr
   td
-    img src=leader_board_result[:github_user].data.avatar_url
+    img src=leader_board_result.github_user.data.avatar_url
+  td=leader_board_result.github_user.data.name || leader_board_result.github_user.data.login
+  td=leader_board_result.pull_request_comments
+  td=leader_board_result.pull_request_merges
+  td=leader_board_result.points
+
+

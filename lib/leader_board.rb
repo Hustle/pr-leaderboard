@@ -14,7 +14,7 @@ class LeaderBoard
         binding.pry unless GithubUser.where(login: entry[:login]).exists?
         entry[:github_user] = GithubUser.find_by_login!(entry[:login])
       end
-      leader_data_hash.values.sort_by{|entry| entry[:points] }.reverse
+      leader_data_hash.values.sort_by{|entry| entry[:points] }.reverse.collect{ |r| Hashie::Mash.new(r) }
     end
   end
 
