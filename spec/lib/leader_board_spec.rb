@@ -28,6 +28,6 @@ describe LeaderBoard do
       {login: "the1337sauce", pull_request_comments: 0, pull_request_merges: 11, points: 22  },
       {login: "pawelgut", pull_request_comments: 21, pull_request_merges: 0, points: 21 },
       {login: "juliantejera", pull_request_comments: 0, pull_request_merges: 7, points: 14 }
-    ].map{|entry| entry.merge(github_user: GithubUser.find_by_login!(entry[:login])) })
+    ].map{|entry| ActiveSupport::HashWithIndifferentAccess.new entry.merge(github_user: GithubUser.find_by_login!(entry[:login])) })
   end
 end
