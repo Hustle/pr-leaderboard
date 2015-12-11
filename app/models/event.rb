@@ -10,6 +10,10 @@ class Event < ActiveRecord::Base
 
   class << self
 
+    def create_unless_exists! data
+      Event.create!(data: data) unless Event.where(github_id: data[:id]).exists?
+    end
+
     def merged_pull_request_counts
       merged_pull_request_events.group("data -> 'payload' -> 'pull_request' -> 'merged_by' -> 'login'").order('count(*) desc').count
     end

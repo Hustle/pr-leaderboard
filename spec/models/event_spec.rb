@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Event, vcr: { record: :none} do
+describe Event, vcr: { record: :new_episodes} do
 
   describe 'data is stored properly' do
 
@@ -39,7 +39,11 @@ describe Event, vcr: { record: :none} do
     end
 
 
-    let!(:event){ Event.create data: github_data }
+    let!(:event){ Event.create_unless_exists! github_data }
+
+    specify 'calling create unless exists does not do anything if the event already exists' do
+      expect{ Event.create_unless_exists! github_data }.to_not raise_error
+    end
 
     specify 'data is stored in database' do
       expect( ActiveSupport::HashWithIndifferentAccess.new(event.data)).to eq github_data
