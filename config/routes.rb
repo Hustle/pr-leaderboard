@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  resource :leader_board, only: :show, controller: 'leader_board'
-
   resource :github_webhooks, only: [:create, :show], defaults: { formats: :json }
+
+  root 'leader_board#show'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
