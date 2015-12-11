@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Event, vcr: { record: :new_episodes} do
+describe Event, vcr: { record: :none } do
 
   describe 'data is stored properly' do
 
@@ -40,6 +40,10 @@ describe Event, vcr: { record: :new_episodes} do
 
 
     let!(:event){ Event.create_unless_exists! github_data }
+
+    specify 'skips if there is no id for some reason' do
+      expect{ Event.create_unless_exists!({}) }.to_not raise_error
+    end
 
     specify 'calling create unless exists does not do anything if the event already exists' do
       expect{ Event.create_unless_exists! github_data }.to_not raise_error

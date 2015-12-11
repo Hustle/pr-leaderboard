@@ -1,0 +1,83 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/user/6278442
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.2.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - token <GITHUB_TOKEN>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Fri, 11 Dec 2015 23:04:39 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4937'
+      X-Ratelimit-Reset:
+      - '1449875924'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Last-Modified:
+      - Mon, 23 Nov 2015 14:34:37 GMT
+      Etag:
+      - W/"05dbbed5a36aaf7fd9aa1b849401dfdc"
+      X-Oauth-Scopes:
+      - gist, notifications, read:org, repo, user
+      X-Accepted-Oauth-Scopes:
+      - user
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - deny
+      Content-Security-Policy:
+      - default-src 'none'
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - 4c8b2d4732c413f4b9aefe394bd65569
+      X-Github-Request-Id:
+      - 46C76020:A39B:6E3C0A2:566B5687
+    body:
+      encoding: ASCII-8BIT
+      string: '{"login":"the1337sauce","id":6278442,"avatar_url":"https://avatars.githubusercontent.com/u/6278442?v=3","gravatar_id":"","url":"https://api.github.com/users/the1337sauce","html_url":"https://github.com/the1337sauce","followers_url":"https://api.github.com/users/the1337sauce/followers","following_url":"https://api.github.com/users/the1337sauce/following{/other_user}","gists_url":"https://api.github.com/users/the1337sauce/gists{/gist_id}","starred_url":"https://api.github.com/users/the1337sauce/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/the1337sauce/subscriptions","organizations_url":"https://api.github.com/users/the1337sauce/orgs","repos_url":"https://api.github.com/users/the1337sauce/repos","events_url":"https://api.github.com/users/the1337sauce/events{/privacy}","received_events_url":"https://api.github.com/users/the1337sauce/received_events","type":"User","site_admin":false,"name":"Nathaniel
+        Linsky","company":null,"blog":"http://www.natelinsky.com","location":null,"email":"linsna01@gmail.com","hireable":null,"bio":null,"public_repos":3,"public_gists":0,"followers":4,"following":4,"created_at":"2013-12-28T23:04:51Z","updated_at":"2015-11-23T14:34:37Z"}'
+    http_version:
+  recorded_at: Fri, 11 Dec 2015 23:04:40 GMT
+recorded_with: VCR 3.0.0

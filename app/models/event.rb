@@ -11,7 +11,7 @@ class Event < ActiveRecord::Base
   class << self
 
     def create_unless_exists! data
-      Event.create!(data: data) unless Event.where(github_id: data[:id]).exists?
+      Event.create!(data: data) unless data[:id].blank? ||  Event.where(github_id: data[:id]).exists?
     end
 
     def merged_pull_request_counts
