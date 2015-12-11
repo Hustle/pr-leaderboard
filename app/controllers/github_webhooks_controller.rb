@@ -12,7 +12,7 @@ class GithubWebhooksController < ActionController::Base
 
   def create
     Rails.logger.info("Received event #{json_body}")
-    Event.create! data: json_body
+    Event.create_unless_exists! json_body
     head(:ok)
   end
 
