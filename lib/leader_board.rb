@@ -11,6 +11,7 @@ class LeaderBoard
       end
       leader_data_hash.values.each do |entry|
         entry[:points] = entry[:pull_request_comments] + (2 * entry[:pull_request_merges])
+        binding.pry unless GithubUser.where(login: entry[:login]).exists?
         entry[:github_user] = GithubUser.find_by_login!(entry[:login])
       end
       leader_data_hash.values.sort_by{|entry| entry[:points] }.reverse

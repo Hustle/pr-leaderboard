@@ -1,2 +1,3 @@
-h1 LeaderBoard#show
-p Find me in app/views/leader_board/show.html.slim
+table
+  =render collection: @results, partial: 'leader_board_result'
+
