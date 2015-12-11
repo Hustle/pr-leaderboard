@@ -1,12 +1,13 @@
-table
-  thead
-    tr
-      th
-      th="Name"
-      th
-        Pull Request Comments
-      th="Merges"
-      th
-        Total Points
-  =render collection: @results, partial: 'leader_board_result'
+.leader_board_results
+  table
+    thead
+      tr
+        th
+        th="Name"
+        th
+          Pull Request Comments
+        th="Merges"
+        th
+          Total Points
+    =render collection: @results, partial: 'leader_board_result'
 
