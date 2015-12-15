@@ -18,7 +18,7 @@ class Sprint
   end
 
   def self.last
-    all.last
+    all.first
   end
 
   def self.all
@@ -29,7 +29,7 @@ class Sprint
       current_start += 2.weeks
       break if current_start > Time.zone.now
     end
-    results
+    results.reverse
   end
 
   def start_date

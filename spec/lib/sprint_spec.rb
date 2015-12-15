@@ -41,6 +41,7 @@ describe Sprint do
 
     end
 
+
     context 'sprint start date is set' do
 
       before do
@@ -52,22 +53,36 @@ describe Sprint do
         expect(subject.start_date).to eq Time.zone.parse('2015-11-30')
       end
 
-      after do
-        Timecop.return
+      specify 'sprint length is 2 weeks later' do
+        expect(subject.end_date).to eq(subject.start_date + 2.weeks)
       end
 
+      specify '#all returns the sprints since sprint start in reverse order' do
 
+        expect(Sprint.all.map{|sprint| [sprint.start_date, sprint.end_date]}).to eq(
+          [
+            ['2015-11-30', '2015-12-14'],
+            ['2015-11-16', '2015-11-30'],
+            ['2015-11-02', '2015-11-16'],
+            ['2015-10-19', '2015-11-02'],
+            ['2015-10-05', '2015-10-19']
+          ].map do |(start_date, end_date)|
+            [ Time.zone.parse(start_date), Time.zone.parse(end_date) ]
+          end
+
+
+
+        )
+
+
+      end
 
     end
-
-
-
-  end
-
-  describe '#all' do
-
   end
 
 
+  after do
+    Timecop.return
+  end
 
 end
