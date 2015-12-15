@@ -8,7 +8,12 @@ class Event < ActiveRecord::Base
 
   store_accessor :data, :org, :repo, :type, :actor, :public, :payload
 
+  def self.this_week
+    where('github_created_at >= ?', Time.zone.now.beginning_of_week)
+  end
+
   class << self
+
 
     def create_unless_exists! data
       Event.create!(data: data) unless data[:id].blank? ||  Event.where(github_id: data[:id]).exists?
@@ -35,14 +40,15 @@ class Event < ActiveRecord::Base
 
     def pull_request_comment_events
       where('data @> ?', { type: 'PullRequestReviewCommentEvent' }.to_json).
-        where("data->'payload'->'pull_request' -> 'user' -> 'id' != (data->'actor' -> 'id')")
+        where("data->'payload'->'pull_request' -> 'user' -> 'id' != (data->'actor' -> 'id')").
+        this_week
     end
-
 
 
     def merged_pull_request_events
       where('data @> ?', { type: "PullRequestEvent", payload: { action: 'closed', pull_request: { merged: true } } }.to_json).
-        where( "data-> 'payload' -> 'pull_request' -> 'user' -> 'login' != ( data->'payload'->'pull_request' -> 'merged_by' -> 'login')")
+        where( "data-> 'payload' -> 'pull_request' -> 'user' -> 'login' != ( data->'payload'->'pull_request' -> 'merged_by' -> 'login')").
+        this_week
     end
 
     def client
