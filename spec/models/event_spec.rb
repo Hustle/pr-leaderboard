@@ -5,8 +5,14 @@ describe Event, vcr: { record: :none } do
   describe '#merged_pull_request_counts' do
 
     before do
-
+      Timecop.freeze Time.zone.parse('2015-12-16')
+      create(:merged_pull_request, data: build(:merged_pull_request_data, created_at: Time.zone.parse('2015-12-15') ))
     end
+
+    specify do
+      expect(Event.merged_pull_request_counts).to eq({})
+    end
+
 
   end
 

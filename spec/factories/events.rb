@@ -15,6 +15,8 @@ FactoryGirl.define do
 
   factory :pull_request_payload_data, parent: :data do
     user { create :user_data }
+    merged_by { create :user_data }
+    merged true
   end
 
 
@@ -31,6 +33,7 @@ FactoryGirl.define do
   factory :merged_pull_request_data, parent: :event_data do
     type 'PullRequestEvent'
     payload
+
   end
 
   factory :merged_pull_request, class: Event do
