@@ -2,6 +2,16 @@ require 'rails_helper'
 
 describe Event, vcr: { record: :none } do
 
+  describe '#merged_pull_request_counts' do
+
+    before do
+
+    end
+
+  end
+
+
+
   describe 'data is stored properly' do
 
     let(:github_data) do
