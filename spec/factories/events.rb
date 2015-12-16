@@ -8,8 +8,9 @@ FactoryGirl.define do
   factory :user_data, parent: :data do
     id { SecureRandom.uuid }
     type "User"
-    login "kbaum"
-    avatar_url "https://avatars.githubusercontent.com/u/96786?v=3"
+    login { Faker::Internet.user_name }
+    avatar_url { "https://avatars.githubusercontent.com/u/#{id}?v=3" }
+    name { Faker::Name.name }
   end
 
   factory :pull_request_payload_data, parent: :data do
