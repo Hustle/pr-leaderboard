@@ -8,8 +8,8 @@ class Event < ActiveRecord::Base
 
   store_accessor :data, :org, :repo, :type, :actor, :public, :payload
 
-  def self.this_week
-    where('github_created_at >= ?', Time.zone.now.beginning_of_week)
+  def self.latest_sprint
+    where('github_created_at >= ?', Sprint.last.start_date)
   end
 
   class << self
@@ -41,14 +41,14 @@ class Event < ActiveRecord::Base
     def pull_request_comment_events
       where('data @> ?', { type: 'PullRequestReviewCommentEvent' }.to_json).
         where("data->'payload'->'pull_request' -> 'user' -> 'id' != (data->'actor' -> 'id')").
-        this_week
+        latest_sprint
     end
 
 
     def merged_pull_request_events
       where('data @> ?', { type: "PullRequestEvent", payload: { action: 'closed', pull_request: { merged: true } } }.to_json).
         where( "data-> 'payload' -> 'pull_request' -> 'user' -> 'login' != ( data->'payload'->'pull_request' -> 'merged_by' -> 'login')").
-        this_week
+        latest_sprint
     end
 
     def client

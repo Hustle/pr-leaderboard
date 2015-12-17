@@ -6,11 +6,15 @@ FactoryGirl.define do
   end
 
   factory :user_data, parent: :data do
-    id { SecureRandom.uuid }
+    sequence(:id) { |n| n }
     type "User"
     login { Faker::Internet.user_name }
     avatar_url { "https://avatars.githubusercontent.com/u/#{id}?v=3" }
     name { Faker::Name.name }
+  end
+
+  factory :github_user do
+    data { create :user_data }
   end
 
   factory :pull_request_payload_data, parent: :data do
@@ -22,7 +26,7 @@ FactoryGirl.define do
 
   factory :event_data, parent: :data do
     created_at "2015-12-14T23:38:54.000Z"
-    id { SecureRandom.uuid }
+    sequence(:id) { |n| n }
   end
 
   factory :payload, parent: :data do
@@ -38,6 +42,9 @@ FactoryGirl.define do
 
   factory :merged_pull_request, class: Event do
     data { create :merged_pull_request_data }
+    before(:create) do |object|
+      create(:github_user, data: object.data.actor) unless GithubUser.where(github_id: object.data.actor.id).exists?
+    end
   end
 
 
