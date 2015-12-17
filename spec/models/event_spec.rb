@@ -2,15 +2,29 @@ require 'rails_helper'
 
 describe Event, vcr: { record: :none } do
 
+  def merged_pull_request(merged_by:, created_at:)
+    create(:merged_pull_request, data: build(:merged_pull_request_data, created_at: created_at, payload: create(:payload, pull_request: build(:pull_request_payload_data, merged_by: create(:user_data, login: merged_by) )) ))
+  end
+
   describe '#merged_pull_request_counts' do
 
     before do
       Timecop.freeze Time.zone.parse('2015-12-16')
-      create(:merged_pull_request, data: build(:merged_pull_request_data, created_at: Time.zone.parse('2015-12-15') ))
+      merged_pull_request(merged_by: 'noah', created_at: '2015-12-15')
+      merged_pull_request(merged_by: 'noah', created_at: '2015-12-16')
+      merged_pull_request(merged_by: 'josie', created_at: '2015-12-16')
+      #doesn't count because before sprint started
+      merged_pull_request(merged_by: 'josie', created_at: '2015-12-13')
+
+      #wrong type of event
+      create :pull_request_comment, data: create(:pull_request_comment_data, created_at: '2015-12-15')
     end
 
     specify do
-      expect(Event.merged_pull_request_counts).to eq({})
+      expect(Event.merged_pull_request_counts).to eq(HashWithIndifferentAccess.new(
+        josie: 1,
+        noah: 2
+      ))
     end
 
 
