@@ -33,7 +33,7 @@ FactoryGirl.define do
   factory :merged_pull_request_data, parent: :event_data do
     type 'PullRequestEvent'
     payload
-
+    actor { create :user_data }
   end
 
   factory :merged_pull_request, class: Event do
@@ -43,6 +43,8 @@ FactoryGirl.define do
 
   factory :pull_request_comment_data, parent: :event_data do
     type "PullRequestReviewCommentEvent"
+    payload
+    actor { create :user_data }
   end
 
 

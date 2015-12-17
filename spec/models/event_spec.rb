@@ -6,9 +6,31 @@ describe Event, vcr: { record: :none } do
     create(:merged_pull_request, data: build(:merged_pull_request_data, created_at: created_at, payload: create(:payload, pull_request: build(:pull_request_payload_data, merged_by: create(:user_data, login: merged_by) )) ))
   end
 
+  describe '#pull_request_comment_counts' do
+    before do
+      Timecop.freeze Time.zone.parse('2015-12-19')
+      #let's not create a github user to avoid call to github api
+      allow_any_instance_of(Event).to receive(:create_github_user)
+      create :pull_request_comment, data: create(:pull_request_comment_data, created_at: '2015-12-18', actor: create(:user_data, login: 'noah') )
+      create :pull_request_comment, data: create(:pull_request_comment_data, created_at: '2015-12-15', actor: create(:user_data, login: 'gracie') )
+      create :pull_request_comment, data: create(:pull_request_comment_data, created_at: '2015-12-18', actor: create(:user_data, login: 'noah') )
+      create :pull_request_comment, data: create(:pull_request_comment_data, created_at: '2015-12-16', actor: create(:user_data, login: 'josie') )
+      create :pull_request_comment, data: create(:pull_request_comment_data, created_at: '2015-12-13', actor: create(:user_data, login: 'josie') )
+    end
+
+    specify do
+      expect(Event.pull_request_comment_counts).to eq( HashWithIndifferentAccess.new(
+        gracie: 1,
+        josie: 1,
+        noah: 2
+      ))
+    end
+  end
+
   describe '#merged_pull_request_counts' do
 
     before do
+      allow_any_instance_of(Event).to receive(:create_github_user)
       Timecop.freeze Time.zone.parse('2015-12-16')
       merged_pull_request(merged_by: 'noah', created_at: '2015-12-15')
       merged_pull_request(merged_by: 'noah', created_at: '2015-12-16')
@@ -26,7 +48,6 @@ describe Event, vcr: { record: :none } do
         noah: 2
       ))
     end
-
 
   end
 
