@@ -1,4 +1,4 @@
-class SlackSlashesController
+class SlackSlashesController << ActionController::Base
 
   def create
     render format_data(LeaderBoard.results)
