@@ -9,7 +9,7 @@ class SlackSlashesController < ActionController::Base
 
   def format_data(ranking_data)
     list = ranking_data.each_with_index.map do |user, i|
-      "#{i+1}. #{user["github_user"]["name"]} #{user["points"]} points\n"
+      "#{user["github_user"]["name"]} #{user["points"]} points\n"
     end
   end
 
