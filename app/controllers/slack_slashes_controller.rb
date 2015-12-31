@@ -1,12 +1,15 @@
 class SlackSlashesController < ActionController::Base
 
   def create
-    render text: format_data(LeaderBoard.results).join
+    render json: {
+      response_type: 'in_channel',
+      text: format_data(LeaderBoard.results).join
+    }
   end
 
   def format_data(ranking_data)
-    ranking_data.map do |user|
-      "1. #{user["github_user"]["name"]} #{user["points"]}\n"
+    list = ranking_data.each_with_index.map do |user, i|
+      "#{i+1}. #{user["github_user"]["name"]} #{user["points"]} points\n"
     end
   end
 
