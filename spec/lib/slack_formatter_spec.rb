@@ -9,6 +9,7 @@ describe SlackFormatter do
       "points" => 55,
       "github_user"=> {
         "data" => {
+          "login" => "ianforsyth",
           "name" => "Ian Forsyth"
         }
       }
