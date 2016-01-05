@@ -15,7 +15,7 @@ describe SlackFormatter do
       }
     }]
 
-    expected = "1. Ian Forsyth 55 points"
+    expected = "1. ianforsyth 55 points"
 
     expect(SlackFormatter.format(data)).to eq expected
   end
