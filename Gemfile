@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.2.2'
+
+#allows us to specify in Heroku but run tests against multiple versions
+ruby ENV['RUBY_VERSION'] if ENV['RUBY_VERSION']
 
 
 gem 'rails_12factor', group: :production
