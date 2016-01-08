@@ -2,6 +2,10 @@ require 'rails_helper'
 
 describe Sprint do
 
+  before do
+    Sprint.start_date = nil
+  end
+
   describe 'Sprint#start_date' do
 
     context 'default start date is the previous monday' do
