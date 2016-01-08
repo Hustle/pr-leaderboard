@@ -6,7 +6,9 @@ addons:
 services:
   - postgresql
 before_script:
-  - psql -c 'create database github_events_test;' -U viewthespace
+  - createuser -s viewthespace
+  - createdb -O viewthespace -E utf8 github_events_development
+  - createdb -O viewthespace -E utf8 github_events_test
 script:
   - RAILS_ENV=test bundle exec rake db:migrate
   - bundle exec rspec spec
