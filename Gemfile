@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 #added rescue nil because of travis running against multiple rubies
-ruby '2.2.4' rescue nil
+ruby '2.2.4'
 
 
 gem 'rails_12factor', group: :production
