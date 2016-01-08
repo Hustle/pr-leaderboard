@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-#allows us to specify in Heroku but run tests against multiple versions
-ruby ENV['RUBY_VERSION'] if ENV['RUBY_VERSION']
+#added rescue nil because of travis running against multiple rubies
+ruby '2.2.4' rescue nil
 
 
 gem 'rails_12factor', group: :production
