@@ -1,5 +1,9 @@
 class LeaderBoardController < ApplicationController
   def show
-    @results = LeaderBoard.results
+    if request.format.html?
+      @results = LeaderBoard.results
+    else
+      render json: LeaderBoard.results.to_json
+    end
   end
 end

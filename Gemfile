@@ -52,6 +52,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'rspec_junit_formatter', '0.2.2' #for CircleCI metadata collection
   gem 'rspec-rails'
   gem 'vcr'
   gem 'webmock'
