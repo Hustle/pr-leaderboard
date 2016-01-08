@@ -1,1 +1,0 @@
-{<img src="https://travis-ci.org/viewthespace/github_events.svg" alt="Build Status" />}[https://travis-ci.org/viewthespace/github_events]
