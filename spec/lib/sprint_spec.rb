@@ -61,6 +61,7 @@ describe Sprint do
         expect(subject.end_date).to eq(subject.start_date + 2.weeks)
       end
 
+
       specify '#all returns the sprints since sprint start in reverse order' do
 
         expect(Sprint.all.map{|sprint| [sprint.start_date, sprint.end_date]}).to eq(
@@ -73,11 +74,17 @@ describe Sprint do
           ].map do |(start_date, end_date)|
             [ Time.zone.parse(start_date), Time.zone.parse(end_date) ]
           end
-
-
-
         )
 
+      end
+
+      describe 'sprint for a given date' do
+
+        specify 'sprint exists with exact start date' do
+
+          expect(Sprint.for_date(Date.parse '2015-10-05').start_date).to eq(Date.parse '2015-10-05' )
+
+        end
 
       end
 

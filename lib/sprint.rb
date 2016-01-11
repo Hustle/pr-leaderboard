@@ -17,6 +17,10 @@ class Sprint
 
   end
 
+  def self.for_date date
+    all.find{ |sprint| date >= sprint.start_date && date < sprint.end_date }
+  end
+
   def self.last
     all.first
   end
