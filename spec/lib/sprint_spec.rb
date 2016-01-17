@@ -86,6 +86,30 @@ describe Sprint do
 
         end
 
+        specify 'a sprint for a date in the middle of that sprint' do
+
+          expect(Sprint.for_date(Date.parse '2015-11-05').start_date).to eq(Date.parse '2015-11-02' )
+
+        end
+
+        specify 'no sprint matches for that date' do
+
+          expect(Sprint.for_date(Date.parse '2015-10-04')).to be_nil
+
+        end
+
+        describe 'end dates are exclusive' do
+
+          it 'does not have a sprint' do
+            expect(Sprint.for_date(Date.parse '2015-12-14')).to be_nil
+          end
+
+          it 'returns the sprint for the start date' do
+            expect(Sprint.for_date(Date.parse '2015-11-02').start_date).to eq(Date.parse '2015-11-02' )
+          end
+
+        end
+
       end
 
     end
