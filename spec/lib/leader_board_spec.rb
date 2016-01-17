@@ -36,7 +36,7 @@ describe LeaderBoard do
     end
 
     specify 'pulls the leaderboard for the sprint starting the 6th' do
-      expect(LeaderBoard.results).to eq(
+      expect(LeaderBoard.new(Date.today).results).to eq(
         [
           {login: "CharlesMcMillan", pull_request_comments: 2, pull_request_merges: 1, points: 4  },
           {login: "ianforsyth", :pull_request_merges=>1, :pull_request_comments=>0, :points=>2},
@@ -69,7 +69,7 @@ describe LeaderBoard do
     end
 
     specify 'returns the leader board' do
-      expect(LeaderBoard.results).to eq([
+      expect(LeaderBoard.new(Date.today).results).to eq([
         {login: "CharlesMcMillan", pull_request_comments: 22, pull_request_merges: 14, points: 50  },
         {login: "ianforsyth", :pull_request_merges=>0, :pull_request_comments=>26, :points=>26},
         {login: "the1337sauce", pull_request_comments: 0, pull_request_merges: 11, points: 22  },
