@@ -10,7 +10,7 @@ before_script:
   - createdb -O viewthespace -E utf8 github_events_development
   - createdb -O viewthespace -E utf8 github_events_test
 script:
-  - RAILS_ENV=test bundle exec rake db:migrate
+  - RAILS_ENV=test bundle exec rake db:create db:migrate
   - bundle exec rspec spec
 before_install:
   - gem install bundler

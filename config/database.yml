@@ -6,7 +6,7 @@
 #
 development: &dev
   adapter: postgresql
-  database: github_events_development
+  database: pr_leaderboard_development
   encoding: utf8
   username: viewthespace
   password:
@@ -15,7 +15,7 @@ development: &dev
 
 test:
   adapter: postgresql
-  database: github_events_test
+  database: pr_leaderboard_test
   encoding: utf8
   username: viewthespace
   password:
