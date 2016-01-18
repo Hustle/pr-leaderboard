@@ -8,8 +8,8 @@ class Event < ActiveRecord::Base
 
   store_accessor :data, :org, :repo, :type, :actor, :public, :payload
 
-  def self.latest_sprint
-    where('github_created_at >= ?', Sprint.last.start_date)
+  def self.for_sprint(sprint)
+    where('github_created_at >= ? and github_created_at < ?', sprint.start_date, sprint.end_date)
   end
 
   class << self
@@ -19,12 +19,12 @@ class Event < ActiveRecord::Base
       Event.create!(data: data) unless data[:id].blank? ||  Event.where(github_id: data[:id]).exists?
     end
 
-    def merged_pull_request_counts
-      merged_pull_request_events.group("data -> 'payload' -> 'pull_request' -> 'merged_by' -> 'login'").order('count(*) desc').count
+    def merged_pull_request_counts(date = Date.today)
+      merged_pull_request_events(date).group("data -> 'payload' -> 'pull_request' -> 'merged_by' -> 'login'").order('count(*) desc').count
     end
 
-    def pull_request_comment_counts
-      pull_request_comment_events.group("data -> 'actor' -> 'login'").order('count(*) desc').count
+    def pull_request_comment_counts(date = Date.today)
+      pull_request_comment_events(date).group("data -> 'actor' -> 'login'").order('count(*) desc').count
     end
 
     def add_events!
@@ -38,17 +38,17 @@ class Event < ActiveRecord::Base
 
     private
 
-    def pull_request_comment_events
+    def pull_request_comment_events(date)
       where('data @> ?', { type: 'PullRequestReviewCommentEvent' }.to_json).
         where("data->'payload'->'pull_request' -> 'user' -> 'id' != (data->'actor' -> 'id')").
-        latest_sprint
+        for_sprint(Sprint.for_date(date))
     end
 
 
-    def merged_pull_request_events
+    def merged_pull_request_events(date)
       where('data @> ?', { type: "PullRequestEvent", payload: { action: 'closed', pull_request: { merged: true } } }.to_json).
         where( "data-> 'payload' -> 'pull_request' -> 'user' -> 'login' != ( data->'payload'->'pull_request' -> 'merged_by' -> 'login')").
-        latest_sprint
+        for_sprint(Sprint.for_date(date))
     end
 
     def client
