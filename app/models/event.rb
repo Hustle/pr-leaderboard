@@ -22,7 +22,8 @@ class Event < ActiveRecord::Base
 
     def deletions_by_login(date = Date.today)
        merged_pull_request_events(date).select("data -> 'actor' -> 'login' as login, data -> 'payload' -> 'pull_request' -> 'deletions' as deletes").
-         each_with_object(Hash.new(0)){|event, hash| hash[event.login] += event.deletes }
+         each_with_object(Hash.new(0)){|event, hash| hash[event.login] += event.deletes }.
+         map{|login, deletions| Hashie::Mash.new(login: login, deletions: deletions) }.sort_by(&:deletions).reverse
     end
 
     def merged_pull_request_counts(date = Date.today)

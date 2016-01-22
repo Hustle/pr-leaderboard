@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   root 'leader_board#show'
 
+  resource :delete_code_leader_board, only: [:show], controller: :delete_code_leader_board
+
   resource :slack_slash, only: [:create]
 
   # The priority is based upon order of creation: first created -> highest priority.
