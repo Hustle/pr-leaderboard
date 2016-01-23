@@ -1,7 +1,7 @@
 class DeleteCodeLeaderBoardController < ApplicationController
 
   def show
-    @results = DeleteCodeLeaderBoard.new(Date.today).results
+    @results = DeleteCodeLeaderBoard.new(date).results
   end
 
 end
