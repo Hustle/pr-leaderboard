@@ -25,7 +25,11 @@ heroku run rake db:migrate --app pr-leaderboard-readme-example
 
 #### Retreiving Github Commits and Pull Requests
 
-Github only allows your to query 300 events at a time so we need to store all events locally.  There are two methods for retreiving data.  Probably the simplest is to just set up a script to run every 10 minutes that checks for new events.  Unless there are more than 300 events in 10 minutes, you should be getting everything.
+Github only allows your to query 300 events at a time so we need to store all events locally.  There are two methods for retreiving data.  
+
+##### Using the API
+
+Probably the simplest is to just set up a script to run every 10 minutes that checks for new events.  Unless there are more than 300 events in 10 minutes, you should be getting everything.  The only issue is, since your access token is personal, it will report on all of your projects.  Not sure if there is a way around this.  This is not a problem with webhooks.
 
 You'll need a personal GITHUB_ACCESS_TOKEN env var set to retreive git events from the github api and store in your database.  You can create one [here](https://github.com/settings/tokens).
 
@@ -46,6 +50,24 @@ rails r "Event.add_events!"
 ```
 
 That's it.  Now every 10 minutes, the job will grab the last 100 github events and persist any new ones.
+
+##### Webhooks
+
+Webhooks can be configured on github at the organization level under settings -> webhooks:
+
+https://github.com/organizations/<your-org>/settings/hooks
+
+![Web hook configuration](https://vts-monosnap.s3.amazonaws.com/Add_webhook_2016-01-29_17-54-47__6stde.png)
+
+Notice the webhook url on your app is available at /github_webhooks and we are set to receive all events.  Pick a good secret key and set it on your app:
+
+```
+heroku config GITHUB_WEBHOOK_SECRET=<shared-webhook-secret> -a pr-leaderboard-readme-example
+```
+
+Now the app should be receiving updates.
+
+Both polling for events and web hook updates work.  I honestly have both running and for redundancy.
 
 ### Setting sprint start
 
