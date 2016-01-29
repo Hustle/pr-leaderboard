@@ -61,12 +61,11 @@ Assuming the rails app has been started, the PR leader board is accessible at th
 
 In order to see past sprints, pass in a date parameter which can be any date within a previous sprint.  For example:
 
-    http://pr-leaderboard.readme-example.herokuapp.com?date=2016-01-23
+[http://pr-leaderboard.readme-example.herokuapp.com?date=2016-01-23][http://pr-leaderboard.readme-example.herokuapp.com?date=2016-01-23)
 
 or
-    ```
-    http://pr-leaderboard.readme-example.herokuapp.com//delete_code_leader_board?date=2016-01-23
-    ```
+
+[http://pr-leaderboard.readme-example.herokuapp.com//delete_code_leader_board?date=2016-01-23](http://pr-leaderboard.readme-example.herokuapp.com//delete_code_leader_board?date=2016-01-23)
     
 ## TODO
 * Add variable length sprints.  Currently hard coded to two weeks.
