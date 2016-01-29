@@ -31,9 +31,23 @@ You'll need a personal GITHUB_ACCESS_TOKEN env var set to retreive git events fr
 
 ```
 heroku config:set GITHUB_ACCESS_TOKEN=<your-github-access-token> --app pr-leaderboard-readme-example
+```
+Now set up the scheduled job within heroku scheduler.  First create the add on:
 
 ```
-Now set up the scheduled job within heroku scheduler
+heroku addons:create scheduler:standard --app pr-leaderboard-readme-example
+heroku addons:open scheduler --app pr-leaderboard-readme-example
+```
+
+Then schedule this command to run every 10 minutes:
+
+```
+rails r "Event.add_events!"
+```
+
+That's it.  Now every 10 minutes, the job will grab the last 100 github events and persist any new ones.
+
+
 
 
 
