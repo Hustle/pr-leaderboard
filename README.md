@@ -9,7 +9,7 @@ If you do all of your bug fixes and features on branches, you need engineers to 
 
 After your project has been around a while, you may notice a buildup of code that's just not needed anymore.  As others have noted, this is a liability.  While this project was not created to track deleted code, it was too easy for us to not just add it to this project as it had all of the necessary github ingrendients.
 
-![image of delete code leaderboard](https://vts-monosnap.s3.amazonaws.com/Delete_Code_Leader_Board_2016-01-29_16-04-17__mkq1v.png)
+![image of delete code leaderboard](https://vts-monosnap.s3.amazonaws.com/Delete_Code_Leader_Board_2016-01-29_17-32-28__8bqsb.png)
 
 ### Installation instruction
 
