@@ -3,13 +3,13 @@
 
 If you do all of your bug fixes and features on branches, you need engineers to review each others code.  We noticed that some engineers on our team were code reviewing titans and we wanted to highlight them each sprint.
 
-![https://vts-monosnap.s3.amazonaws.com/PR_Leader_Board_2016-01-29_15-57-37__6nseo.png](image of leader board)
+![image of pr leaderboard](https://vts-monosnap.s3.amazonaws.com/PR_Leader_Board_2016-01-29_15-57-37__6nseo.png)
 
 ### Delete Code Leaderboard
 
 After your project has been around a while, you may notice a buildup of code that's just not needed anymore.  As others have noted, this is a liability.  While this project was not created to track deleted code, it was too easy for us to not just add it to this project as it had all of the necessary github ingrendients.
 
-![https://vts-monosnap.s3.amazonaws.com/Delete_Code_Leader_Board_2016-01-29_16-04-17__mkq1v.png])(image of delete code leaderboard)
+![image of delete code leaderboard](https://vts-monosnap.s3.amazonaws.com/Delete_Code_Leader_Board_2016-01-29_16-04-17__mkq1v.png)
 
 ### Installation instruction
 
