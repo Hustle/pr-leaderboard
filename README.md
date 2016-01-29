@@ -47,8 +47,29 @@ rails r "Event.add_events!"
 
 That's it.  Now every 10 minutes, the job will grab the last 100 github events and persist any new ones.
 
+### Setting sprint start
 
+Both Leader Boards restart after 2 week sprints.  In order to know when the first sprint started, we need to set another environment variable.  
 
+```
+heroku config:set SPRINT_START=2015-10-05 --app pr-leaderboard-readme-example
+```
+
+### Accessing the leader boards
+
+Assuming the rails app has been started, the PR leader board is accessible at the default root path '/'.  The Delete Code leader board is available at '/delete_code_leader_board/'
+
+In order to see past sprints, pass in a date parameter which can be any date within a previous sprint.  For example:
+
+    http://pr-leaderboard.readme-example.herokuapp.com?date=2016-01-23
+
+or
+    http://pr-leaderboard.readme-example.herokuapp.com//delete_code_leader_board?date=2016-01-23
+    
+## TODO
+* Add variable length sprints.  Currently hard coded to two weeks.
+* Add drop down for selecting sprints
+* Add navigation
 
 
 
