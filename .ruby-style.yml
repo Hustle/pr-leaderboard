@@ -1,0 +1,85 @@
+AllCops:
+  Exclude:
+    - "vendor/**/*"
+    - "db/schema.rb"
+  UseCache: false
+
+######### Ruby #########
+
+Style/FileName:
+  Description: Use snake_case for source file names.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#snake-case-files
+  Enabled: true
+  Exclude: []
+
+Style/PredicateName:
+  Description: Check the names of predicate methods.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#bool-methods-qmark
+  Enabled: true
+  NamePrefix:
+  - is_
+  - has_
+  - have_
+  NamePrefixBlacklist:
+  - is_
+  Exclude:
+  - spec/**/*
+
+Style/SingleLineMethods:
+  Description: Avoid single-line methods.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-single-line-methods
+  Enabled: true
+  AllowIfMethodIsEmpty: true
+
+Lint/AssignmentInCondition:
+  Description: Don't use assignment in conditions.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#safe-assignment-in-condition
+  Enabled: true
+  AllowSafeAssignment: true
+
+Style/OneLineConditional:
+  Description: Favor the ternary operator(?:) over if/then/else/end constructs.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#ternary-operator
+  Enabled: true
+
+Style/Tab:
+  Enabled: true
+
+Style/TrailingWhitespace:
+  Enabled: true
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#hash-literals'
+  SupportedStyles:
+    - ruby19
+    - ruby19_no_mixed_keys
+    - hash_rockets
+  # Force hashes that have a symbol value to use hash rockets
+  UseHashRocketsWithSymbolValues: false
+
+######### Metrics #########
+
+Metrics/MethodLength:
+  Description: Avoid methods longer than 15 lines of code.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#short-methods
+  Enabled: true
+  CountComments: false
+  Max: 15
+
+######### Rails #########
+
+Rails/FindEach:
+  Include:
+    - app/models/**/*.rb
+
+Rails/Output:
+  Include:
+    - app/**/*.rb
+    - config/**/*.rb
+    - db/**/*.rb
+    - lib/**/*.rb
+
+Rails/PluralizationGrammar:
+  Include:
+    - app/**/*.rb
