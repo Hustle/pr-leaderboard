@@ -9,5 +9,4 @@ class SlackSlashesController < ActionController::Base
     }
   end
 
-
 end
