@@ -1,6 +1,5 @@
 class LeaderBoard < Struct.new(:date)
 
-
   def results
     leader_data_hash = Event.merged_pull_request_counts(date).each_with_object({}) do | (login, count), hash|
       hash[login] = { login: login, pull_request_merges: count, pull_request_comments: 0 }
@@ -15,6 +14,5 @@ class LeaderBoard < Struct.new(:date)
     end
     leader_data_hash.values.sort_by{|entry| entry[:points] }.reverse.collect{ |r| Hashie::Mash.new(r) }
   end
-
 
 end

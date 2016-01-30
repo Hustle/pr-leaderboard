@@ -4,10 +4,24 @@ class LeaderBoardController < ApplicationController
 
   def show
     if request.format.html?
-      @results = LeaderBoard.new(date).results
+      @results = results
     else
-      render json: LeaderBoard.new(date).results
+      render json: results
     end
+  end
+
+  private
+
+  def results
+    LeaderBoard.new(date).results
+  end
+
+  def sprint
+    @sprint ||= Sprint.for_date(date)
+  end
+
+  def date
+    Date.parse(params[:date].presence || Date.today.to_s)
   end
 
 end
