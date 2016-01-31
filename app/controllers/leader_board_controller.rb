@@ -16,12 +16,5 @@ class LeaderBoardController < ApplicationController
     LeaderBoard.new(date).results
   end
 
-  def sprint
-    @sprint ||= Sprint.for_date(date)
-  end
-
-  def date
-    Date.parse(params[:date].presence || Date.today.to_s)
-  end
 
 end
