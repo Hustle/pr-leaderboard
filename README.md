@@ -25,7 +25,7 @@ heroku run rake db:migrate --app pr-leaderboard-readme-example
 
 #### Retreiving Github Commits and Pull Requests
 
-Github only allows your to query 300 events at a time so we need to store all events locally.  There are two methods for retreiving data.  
+Github only allows you to query 300 events at a time so we need to store all events locally.  There are two methods for retreiving data.  
 
 ##### Using the API
 
