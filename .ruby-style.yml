@@ -1,10 +1,16 @@
 AllCops:
+  DisabledByDefault: true
   Exclude:
     - "vendor/**/*"
     - "db/schema.rb"
   UseCache: false
 
 ######### Ruby #########
+
+Style/StringLiterals:
+  Description: 'Checks if uses of quotes match the configured preference.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#consistent-string-literals'
+  Enabled: false
 
 Style/FileName:
   Description: Use snake_case for source file names.
