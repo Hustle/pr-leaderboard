@@ -29,12 +29,12 @@ describe DeleteCodeLeaderBoard do
     expect(DeleteCodeLeaderBoard.new(date).results).to eq (
       [
         {
-          "login"=>"ianforsyth",
+          "id"=>9,
           "deletions"=>10,
           "github_user"=> ian
         },
         {
-          "login"=>"CharlesMcMillan",
+          "id"=>12,
           "deletions"=>7,
           "github_user"=> charley
         }
