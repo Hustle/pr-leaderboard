@@ -28,11 +28,11 @@ class Event < ActiveRecord::Base
     end
 
     def merged_pull_request_counts(date = Date.today)
-      merged_pull_request_events(date).group("data -> 'payload' -> 'pull_request' -> 'merged_by' -> 'login'").order('count(*) desc').count
+      merged_pull_request_events(date).group("data -> 'payload' -> 'pull_request' -> 'merged_by' -> 'id'").order('count(*) desc').count
     end
 
     def pull_request_comment_counts(date = Date.today)
-      pull_request_comment_events(date).group("data -> 'actor' -> 'login'").order('count(*) desc').count
+      pull_request_comment_events(date).group("data -> 'actor' -> 'id'").order('count(*) desc').count
     end
 
     def add_events!
