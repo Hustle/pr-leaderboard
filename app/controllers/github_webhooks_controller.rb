@@ -1,4 +1,3 @@
-# app/controllers/github_webhooks_controller.rb
 class GithubWebhooksController < ActionController::Base
 
   include GithubWebhook::Processor
