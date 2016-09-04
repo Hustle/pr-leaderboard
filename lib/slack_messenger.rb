@@ -22,30 +22,9 @@ class SlackMessenger
 
     # message attachment json
     {
-      fallback: 'TODO',
+      fallback: 'top 5 leaderboard standings',
       color: "#36a64f",
       fields: top_users
     }
-
-# """{
-#     "attachments": [
-#         {
-#             "fallback": "Required plain-text summary of the attachment.",
-#             "color": "#36a64f",
-#             "pretext": "Top PR leaderboard rankings",
-#             "fields": [
-#                 {
-#                     "value": "1. charlesmcm - 24 points"
-#                 },
-#                 {
-#                     "value": "2. charlesmcm - 45 points"
-#                 },
-#                 {
-#                     "value": "3. charlesmcm - 45 points"
-#                 }
-#             ]
-#         }
-#     ]
-# }
   end
 end
