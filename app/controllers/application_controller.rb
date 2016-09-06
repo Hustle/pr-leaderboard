@@ -15,6 +15,4 @@ class ApplicationController < ActionController::Base
     Date.parse(params[:date].presence || Date.today.to_s)
   end
 
-
-
 end

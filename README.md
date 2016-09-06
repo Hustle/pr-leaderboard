@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/viewthespace/pr-leaderboard.svg)](https://travis-ci.org/viewthespace/pr-leaderboard)
 [![Circle CI](https://circleci.com/gh/viewthespace/pr-leaderboard.svg?style=svg)](https://circleci.com/gh/viewthespace/pr-leaderboard)
+[![Code Climate](https://codeclimate.com/repos/57c43005e8984f5d410004f9/badges/466c6346503a3eca5353/gpa.svg)](https://codeclimate.com/repos/57c43005e8984f5d410004f9/feed)
 
 If you do all of your bug fixes and features on branches, you need engineers to review each others code.  We noticed that some engineers on our team were code reviewing titans and we wanted to highlight them each sprint.
 
@@ -16,7 +17,7 @@ After your project has been around a while, you may notice a buildup of code tha
 This is a simple rails 4 project.  We run it on Heroku but it can be run on anywhere with access to ruby 2.X+ and postgres 9.4+.  Since it's easy to set up on heroku, the instructions below will assume Heroku.  The commands below clone the repo, create a heroku app, push the project to the heroku app, and create the database.
 
 ```
-git clone https://github.com/viewthespace/pr-leaderboard.git 
+git clone https://github.com/viewthespace/pr-leaderboard.git
 cd pr-leaderboard
 heroku apps:create pr-leaderboard-readme-example
 git push heroku master
@@ -88,11 +89,8 @@ In order to see past sprints, pass in a date parameter which can be any date wit
 or
 
 [http://pr-leaderboard.readme-example.herokuapp.com//delete_code_leader_board?date=2016-01-23](http://pr-leaderboard.readme-example.herokuapp.com//delete_code_leader_board?date=2016-01-23)
-    
+
 ## TODO
 * Add variable length sprints.  Currently hard coded to two weeks.
 * Add drop down for selecting sprints
 * Add navigation
-
-
-

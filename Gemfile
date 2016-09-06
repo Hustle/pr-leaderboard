@@ -34,7 +34,8 @@ gem 'github_webhook'
 gem "octokit"
 gem 'puma'
 gem 'hashie'
-
+gem 'slack-notifier'
+gem 'thor-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -51,6 +52,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'factory_girl_rails'
   gem 'faker'
+  gem 'dotenv-rails'
 end
 
 group :test do
@@ -70,4 +72,3 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-

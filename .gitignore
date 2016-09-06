@@ -20,3 +20,5 @@
 
 #ignore postgres dumps
 *.dump
+
+.env
